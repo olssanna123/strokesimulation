@@ -10,7 +10,6 @@ from shapely.geometry import Point
 from shapely.geometry import Polygon
 from shapely.geometry import shape, Polygon, MultiPolygon
 
-
 # --------------------
 # Shapefile to GeoJSON
 
@@ -72,19 +71,3 @@ def create_sampling_array():
         j += 1
     return sampling_array
 
-# --------------------
-# Draw sample
-
-# Pseudo-random number generator
-# Seed used for reproducibility
-rng = np.random.default_rng(seed=12345)
-
-# Return random integer between 0 and highest_number
-def model(highest_number):
-    return rng.integers(0, highest_number)
-
-# Draw a sample from sampling_array between 0 and highest_number
-def draw_sample(sampling_array):
-    index = model(len(sampling_array))
-    sample = sampling_array[index]
-    return sample
