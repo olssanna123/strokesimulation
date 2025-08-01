@@ -3,9 +3,31 @@
 # Imports
 import pandas as pd
 import numpy as np
+import geopandas as gpd
+import json
+import random
+from shapely.geometry import Point
+from shapely.geometry import Polygon
 
+# --------------------
 # Shapefile to GeoJSON
+
+def shapefile_to_geojson(filename, filename_result):
+    gdf = gpd.read_file(filename)
+    gdf.to_file(filename_result, driver="GeoJSON")
+
+# --------------------
 # Filter GeoJSON file by list of municipality
+
+def filter_by_municipalities(municipalities, filename_GeoJSON, column_name, filename_filtered):
+    # Load the GeoJSON file
+    gdf = gpd.read_file(filename_GeoJSON)
+    # Filter by municipality name
+    filtered_gdf = gdf[gdf[column_name].isin(municipalities)]
+    # Save filtered data as a new GeoJSON
+    filtered_gdf.to_file(filename_filtered, driver="GeoJSON")
+
+# --------------------
 # List of emergency hospitals
 
 # --------------------
