@@ -8,6 +8,8 @@ import json
 import random
 from shapely.geometry import Point
 from shapely.geometry import Polygon
+from shapely.geometry import shape, Polygon, MultiPolygon
+
 
 # --------------------
 # Shapefile to GeoJSON
