@@ -1,4 +1,4 @@
-#Result
+#result
 
 # Database
 # Create database

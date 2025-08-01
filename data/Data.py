@@ -1,4 +1,4 @@
-# Data
+# data
 
 # Shapefile to GeoJSON
 # Filter GeoJSON file by list of municipality
