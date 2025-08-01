@@ -9,7 +9,6 @@ from shapely.geometry import Polygon
 from shapely.geometry import shape, Polygon, MultiPolygon
 
 # Randomly generated municipality
-# Generate random point within polygon and return coordinates
 # RT90 (swedish grid) coordinates to ?
 
 # --------------------
@@ -77,3 +76,17 @@ def get_borders_geojson(geojson_filename, municipality):
         print("The feature collected from the geojson file is " + str(feature))
     pol = geojson_to_polygon(feature)
     return pol
+
+# --------------------
+# Generate random point within polygon and return coordinates
+
+def get_random_point(poly):
+    min_x, min_y, max_x, max_y = poly.bounds
+    while (True):
+        point = Point([random.uniform(min_x, max_x), random.uniform(min_y, max_y)])
+        if (point.within(poly)):
+            break
+        else:
+            continue
+    point_tuple = (point.x, point.y)
+    return point_tuple
