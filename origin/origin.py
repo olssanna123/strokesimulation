@@ -9,7 +9,6 @@ from shapely.geometry import Polygon
 from shapely.geometry import shape, Polygon, MultiPolygon
 import numpy as np
 
-
 # RT90 (swedish grid) coordinates to ?
 
 # --------------------
