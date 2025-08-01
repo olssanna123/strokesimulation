@@ -88,6 +88,3 @@ def draw_sample(sampling_array):
     index = model(len(sampling_array))
     sample = sampling_array[index]
     return sample
-
-# --------------------
-
