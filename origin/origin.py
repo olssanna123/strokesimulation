@@ -9,11 +9,8 @@ from shapely.geometry import Polygon
 from shapely.geometry import shape, Polygon, MultiPolygon
 
 # Randomly generated municipality
-# Get borders for municipality as polygon
 # Generate random point within polygon and return coordinates
 # RT90 (swedish grid) coordinates to ?
-# Get GeoJSON municipality feature
-# Flatten ? GeoJSON feature to polygon
 
 # --------------------
 # Get GeoJSON municipality feature
