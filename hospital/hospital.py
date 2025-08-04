@@ -3,15 +3,11 @@
 # Imports
 
 # --------------------
-# Get the calculated travel time between two destinations
-
-def get_time(origin, destination):
+# Helper functions
+def get_time(origin, destination):  # Get the calculated travel time between two destinations
     pass
 
-# --------------------
-# Get the time difference
-
-def time_difference(a, b):
+def time_difference(a, b):  # Get the time difference
     if (a > b):
         return a-b
     else:
@@ -25,28 +21,25 @@ def get_time_at_hospital():
 
 # --------------------
 # Get the travel time
-# Calculate travel time to emergency hospital in sec
-# Calculate travel time from emergency hospital to final hospital in sec
-# Calculate total time from origin to final hospital via emergency hospital in sec
-# Calculate time from origin to final hospital in sec
 
 def get_travel_time(origin, emergency_hospital, final_hospital):
 
-    # Calculate the travel time from origin to the emergency hospital
+    # Calculate the travel time from origin to the emergency hospital in sec
     origin_to_emergency_hospital = get_time(origin, emergency_hospital)
 
-    # Time at the emergency hospital
+    # Time at the emergency hospital in sec
     time_at_emergency_hospital = get_time_at_hospital()
 
-    # Calculate the travel time from the emergency hospital to the final hospital
+    # Calculate the travel time from the emergency hospital to the final hospital in sec
     emergency_hospital_to_final_hospital = get_time(emergency_hospital, final_hospital)
 
-    # Total travel time from origin to final hospital via emergency hospital
+    # Total travel time from origin to final hospital via emergency hospital in sec
     total_time_via_emergency_hospital = origin_to_emergency_hospital + time_at_emergency_hospital +  emergency_hospital_to_final_hospital
 
-    # Calculate travel time from origin straight to final hospital
+    # Calculate travel time from origin straight to final hospital in sec
     origin_to_final_hospital = get_time(origin, final_hospital)
 
+    # Calculate the saved time going straight to Sahlgrenska
     saved_time = time_difference(total_time_via_emergency_hospital, origin_to_final_hospital)
 
     travel_time = {
@@ -86,17 +79,11 @@ def get_emergency_hospital(origin):
         i = i + 1
     return closest_emergency_hospital
 
+def name_to_coord(name):
+    return emergency_hospitals_coord[name]
+
 # --------------------
 # Decision rules
 
 # --------------------
 # Hospital in adjacent region
-
-# --------------------
-
-def name_to_coord(name):
-    return emergency_hospitals_coord[name]
-
-def test_name_to_coord():
-    print(name_to_coord("Kungälvs sjukhus"))
-
