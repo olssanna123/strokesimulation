@@ -36,7 +36,7 @@ def get_travel_time(origin, emergency_hospital, final_hospital):
     # Calculate travel time from origin straight to final hospital in sec
     origin_to_final_hospital = get_time(origin, final_hospital)
 
-    # Calculate the saved time going straight to final hospital
+    # Calculate the saved time going straight to final hospital in sec
     saved_time = time_difference(total_time_via_emergency_hospital, origin_to_final_hospital)
 
     travel_time = {
@@ -52,7 +52,6 @@ def get_travel_time(origin, emergency_hospital, final_hospital):
 
 # --------------------
 # Find closest emergency hospital
-
 def get_emergency_hospital(origin):
     closest_emergency_hospital = emergency_hospitals[0][0]
     min_time = get_time(origin, emergency_hospitals[0][1])
@@ -65,6 +64,7 @@ def get_emergency_hospital(origin):
         i = i + 1
     return closest_emergency_hospital
 
+# Name to coordinates of emergency hospital
 def name_to_coord(name):
     return emergency_hospitals_coord[name]
 
