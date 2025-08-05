@@ -27,7 +27,6 @@ def main():
     parsed_borders = parse_borders(borders)
     coords = parsed_borders["Polygon"]
     tuple_coords = [tuple(coord) for coord in coords]
-    print(tuple_coords)
     convert_borders(tuple_coords)
 
     return

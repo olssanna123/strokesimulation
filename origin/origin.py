@@ -49,6 +49,7 @@ def parse_borders(feature):
 
     geom_type = geometry.get("type")
     coordinates = geometry.get("coordinates")
+    print(coordinates)
 
     if geom_type == "Polygon":
         res = {
