@@ -1,14 +1,8 @@
 # Data
 
 # Imports
-import pandas as pd
-import numpy as np
 import geopandas as gpd
-import json
-import random
-from shapely.geometry import Point
-from shapely.geometry import Polygon
-from shapely.geometry import shape, Polygon, MultiPolygon
+import pandas as pd
 
 # --------------------
 # Shapefile to GeoJSON
@@ -20,13 +14,13 @@ def shapefile_to_geojson(filename, filename_result):
 # --------------------
 # Filter GeoJSON file by list of municipality
 
-def filter_by_municipalities(municipalities, filename_GeoJSON, column_name, filename_filtered):
+def filter_by_municipalities(mun, filename, column_name, filename_result):
     # Load the GeoJSON file
-    gdf = gpd.read_file(filename_GeoJSON)
+    gdf = gpd.read_file(filename)
     # Filter by municipality name
-    filtered_gdf = gdf[gdf[column_name].isin(municipalities)]
+    filtered_gdf = gdf[gdf[column_name].isin(mun)]
     # Save filtered data as a new GeoJSON
-    filtered_gdf.to_file(filename_filtered, driver="GeoJSON")
+    filtered_gdf.to_file(filename_result, driver="GeoJSON")
 
 # --------------------
 # List of emergency hospitals
