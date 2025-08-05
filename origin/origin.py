@@ -4,6 +4,7 @@ import random
 import numpy as np
 from shapely.geometry import Point
 from shapely.geometry import shape, Polygon, MultiPolygon
+from pyproj import Transformer
 
 # --------------------
 # Randomly generated municipality
@@ -85,7 +86,7 @@ def get_borders(filename, mun):
     return pol
 
 # --------------------
-# Generate random point within polygon and return coordinates in the Swedish RT90 coordinate system
+# Generate random point within polygon and return coordinates
 def get_origin(poly):
     min_x, min_y, max_x, max_y = poly.bounds
     while (True):
@@ -96,3 +97,4 @@ def get_origin(poly):
             continue
     point_tuple = (point.x, point.y)
     return point_tuple
+
