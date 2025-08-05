@@ -27,6 +27,8 @@ def main():
     print(borders)
     parsed_borders = parse_borders(borders)
     print(parsed_borders)
+    plot_points(parsed_borders["Polygon"])
+
     return
 
 main()

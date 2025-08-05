@@ -4,7 +4,6 @@ import random
 import numpy as np
 from shapely.geometry import Point
 
-# Get borders
 def extract_borders(filename, mun):
     """
         Extracts the feature mun from a GeoJSON feature collection
@@ -26,8 +25,6 @@ def extract_borders(filename, mun):
             return feature
     return None
 
-# --------------------
-# GeoJSON to polygon
 def parse_borders(feature):
     """
     Extracts only the border (outer ring) coordinates from a GeoJSON Polygon or MultiPolygon feature.
@@ -68,8 +65,10 @@ def parse_borders(feature):
     else:
         raise ValueError(f"Unsupported geometry type: {geom_type}")
 
-# --------------------
-# Generate random point within polygon and return coordinates
+def convert_borders():
+    pass
+
+# Generate a random point within polygon and return coordinates
 def get_origin(poly):
     min_x, min_y, max_x, max_y = poly.bounds
     while (True):
