@@ -81,10 +81,7 @@ def convert_borders(coords):
     transformer = Transformer.from_crs("EPSG:3006", "EPSG:4326", always_xy=True)
 
     coords_wgs84 = [transformer.transform(x, y) for x, y in coords]
-
-    # Print or use in OSRM (format: lon,lat)
-    for lon, lat in coords_wgs84:
-        print(f"{lon},{lat}")
+    print(coords_wgs84)
 
 # Generate a random point within polygon and return coordinates
 def get_origin(poly):
