@@ -4,10 +4,31 @@ import random
 import numpy as np
 from shapely.geometry import Point
 
+# Get borders
+def extract_borders(filename, mun):
+    """
+        Extracts the feature mun from a GeoJSON feature collection
+
+        Parameters:
+            filename (str): A GeoJSON file.
+            mun (str): The name of the municipality.
+
+        Returns:
+            GeoJSON feature
+            None
+
+    """
+    with open(filename, 'r', encoding='utf-8') as f:
+        geojson_data = json.load(f)
+
+    for feature in geojson_data.get("features", []):
+        if feature.get("properties", {}).get("KnNamn") == mun:
+            return feature
+    return None
+
 # --------------------
-# Helper functions
 # GeoJSON to polygon
-def parse_geojson_polygon_borders(feature):
+def parse_borders(feature):
     """
     Extracts only the border (outer ring) coordinates from a GeoJSON Polygon or MultiPolygon feature.
 
@@ -41,22 +62,11 @@ def parse_geojson_polygon_borders(feature):
     elif geom_type == "MultiPolygon":
         res = {
             "Geom type": geom_type,
-            "Polygon": [polygon[0] for polygon in coordinates]  # Outer rings of each polygon
+            "MultiPolygon": [polygon[0] for polygon in coordinates]  # Outer rings of each polygon
         }
         return res
     else:
         raise ValueError(f"Unsupported geometry type: {geom_type}")
-
-# --------------------
-# Get borders
-def get_borders(filename, mun):
-    with open(filename, 'r', encoding='utf-8') as f:
-        geojson_data = json.load(f)
-
-    for feature in geojson_data.get("features", []):
-        if feature.get("properties", {}).get("KnNamn") == mun:
-            return feature
-    return None
 
 # --------------------
 # Generate random point within polygon and return coordinates

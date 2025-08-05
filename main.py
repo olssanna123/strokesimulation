@@ -1,8 +1,7 @@
 # Main
-from data.data import shapefile_to_geojson, get_municipalities, filter_by_municipalities
-from origin.origin import get_borders
-
 import matplotlib.pyplot as plt
+
+from origin.origin import extract_borders, parse_borders
 
 
 def plot_points(points):
@@ -24,8 +23,10 @@ def plot_points(points):
     plt.show()
 
 def main():
-    borders = get_borders("Kartogram_SE_filtered", "Härryda")
+    borders = extract_borders("Kartogram_SE_filtered", "Härryda")
     print(borders)
+    parsed_borders = parse_borders(borders)
+    print(parsed_borders)
     return
 
 main()
