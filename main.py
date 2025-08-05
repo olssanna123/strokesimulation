@@ -2,55 +2,30 @@
 from data.data import shapefile_to_geojson, get_municipalities, filter_by_municipalities
 from origin.origin import get_borders
 
-
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.pyplot as plt
-from shapely.geometry import Polygon
-import matplotlib.patches as patches
 
-def plot_shapely_polygon(shapely_polygon):
-    """
-    Plots a Shapely Polygon on a 2D graph.
 
-    Args:
-        shapely_polygon (shapely.geometry.Polygon): A Shapely Polygon object.
-    """
-    if not isinstance(shapely_polygon, Polygon):
-        raise TypeError("Input must be a shapely.geometry.Polygon")
+def plot_points(points):
+    # Separate the input into x and y lists
+    x_vals = [point[0] for point in points]
+    y_vals = [point[1] for point in points]
 
-    fig, ax = plt.subplots()
+    # Plot the points
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_vals, y_vals, marker='o', linestyle='-')
 
-    # Exterior
-    exterior_coords = list(shapely_polygon.exterior.coords)
-    exterior_patch = patches.Polygon(exterior_coords, closed=True, edgecolor='black', facecolor='lightblue')
-    ax.add_patch(exterior_patch)
+    # Optionally, connect the last point to the first to close the shape
+    plt.plot([x_vals[-1], x_vals[0]], [y_vals[-1], y_vals[0]], marker='o', linestyle='-')
 
-    # Interiors (holes)
-    for interior in shapely_polygon.interiors:
-        interior_coords = list(interior.coords)
-        hole_patch = patches.Polygon(interior_coords, closed=True, edgecolor='black', facecolor='white')
-        ax.add_patch(hole_patch)
-
-    # Set plot limits
-    x_vals, y_vals = zip(*shapely_polygon.exterior.coords)
-    ax.set_xlim(min(x_vals) - 1, max(x_vals) + 1)
-    ax.set_ylim(min(y_vals) - 1, max(y_vals) + 1)
-    ax.set_aspect('equal')
-    ax.grid(True)
-    plt.title("Shapely Polygon Plot")
-    plt.xlabel("X-axis")
-    plt.ylabel("Y-axis")
+    plt.title('Plot of Points')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.grid(True)
     plt.show()
 
-
 def main():
-    shapefile_to_geojson("Kartogram_SE.shp", "Kartogram_SE")
-    mun = get_municipalities()
-    filter_by_municipalities(mun, "Kartogram_SE", "KnNamn", "Kartogram_SE_filtered")
     borders = get_borders("Kartogram_SE_filtered", "Härryda")
     print(borders)
-    plot_shapely_polygon(borders)
     return
 
 main()
