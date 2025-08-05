@@ -6,14 +6,12 @@ import pandas as pd
 
 # --------------------
 # Shapefile to GeoJSON
-
 def shapefile_to_geojson(filename, filename_result):
     gdf = gpd.read_file(filename)
     gdf.to_file(filename_result, driver="GeoJSON")
 
 # --------------------
 # Filter GeoJSON file by list of municipality
-
 def filter_by_municipalities(mun, filename, column_name, filename_result):
     # Load the GeoJSON file
     gdf = gpd.read_file(filename)
@@ -36,7 +34,6 @@ emergency_hospitals_coord = {
 
 # --------------------
 # Population data
-
 # The number of citizens in each municipality
 data = {
   "Kommun": ['Ale','Alingsås','Bengtsfors','Bollebygd','Borås','Dals-Ed','Essunga','Falköping','Färgelanda','Grästorp','Gullspång','Göteborg','Götene','Herrljunga','Hjo','Härryda','Karlsborg','Kungälv','Lerum','Lidköping','Lilla Edet','Lysekil','Mariestad','Mark','Mellerud','Munkedal','Mölndal','Orust','Partille','Skara','Skövde','Sotenäs','Stenungsund','Strömstad','Svenljunga','Tanum','Tibro','Tidaholm','Tjörn','Tranemo','Trollhättan','Töreboda','Uddevalla','Ulricehamn','Vara','Vårgårda','Vänersborg','Åmål','Öckerö'],
@@ -48,7 +45,6 @@ def get_population_data():
 
 # --------------------
 # Create sampling array
-
 # Function creates an array with the name of the municipality repeated the number of times as the number of it's citizens
 def create_sampling_array():
     data = get_population_data()
