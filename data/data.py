@@ -1,6 +1,4 @@
 # Data
-
-# Imports
 import geopandas as gpd
 import pandas as pd
 
@@ -69,4 +67,3 @@ def create_sampling_array():
             k += 1
         j += 1
     return sampling_array
-
