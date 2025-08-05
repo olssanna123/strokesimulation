@@ -3,23 +3,7 @@ import geopandas as gpd
 import pandas as pd
 
 # --------------------
-# Shapefile to GeoJSON
-def shapefile_to_geojson(filename, filename_result):
-    gdf = gpd.read_file(filename)
-    gdf.to_file(filename_result, driver="GeoJSON")
-
-# --------------------
-# Filter GeoJSON file by list of municipality
-def filter_by_municipalities(mun, filename, column_name, filename_result):
-    # Load the GeoJSON file
-    gdf = gpd.read_file(filename)
-    # Filter by municipality name
-    filtered_gdf = gdf[gdf[column_name].isin(mun)]
-    # Save filtered data as a new GeoJSON
-    filtered_gdf.to_file(filename_result, driver="GeoJSON")
-
-# --------------------
-# List of emergency hospitals
+# List of emergency hospitals in region
 emergency_hospitals = [("Kungälvs sjukhus", (57.878303, 11.969459)), ("Norra Älvsborgs länssjukhus", (58.318547, 12.265819)), ("Södra Älvsborgs Sjukhus", (57.724261, 12.961380)), ("Alingsås lasarett", (57.928649, 12.521170)), ("Skaraborgs Sjukhus Skövde", (58.426663, 13.851575)), ("Sahlgrenska Universitetssjukhuset", (57.6833, 11.9549))]
 emergency_hospitals_coord = {
     "Kungälvs sjukhus": (57.878303, 11.969459),
@@ -31,6 +15,13 @@ emergency_hospitals_coord = {
 }
 
 # --------------------
+# List of municipalities in region
+list_mun = ['Ale','Alingsås','Bengtsfors','Bollebygd','Borås','Dals-Ed','Essunga','Falköping','Färgelanda','Grästorp','Gullspång','Göteborg','Götene','Herrljunga','Hjo','Härryda','Karlsborg','Kungälv','Lerum','Lidköping','Lilla Edet','Lysekil','Mariestad','Mark','Mellerud','Munkedal','Mölndal','Orust','Partille','Skara','Skövde','Sotenäs','Stenungsund','Strömstad','Svenljunga','Tanum','Tibro','Tidaholm','Tjörn','Tranemo','Trollhättan','Töreboda','Uddevalla','Ulricehamn','Vara','Vårgårda','Vänersborg','Åmål','Öckerö']
+
+def get_municipalities():
+  return list_mun
+
+# --------------------
 # Population data
 # The number of citizens in each municipality
 data = {
@@ -40,6 +31,19 @@ data = {
 
 def get_population_data():
   return data
+
+# --------------------
+# Shapefile to GeoJSON
+def shapefile_to_geojson(filename, filename_result):
+    gdf = gpd.read_file(filename)
+    gdf.to_file(filename_result, driver="GeoJSON")
+
+# --------------------
+# Filter GeoJSON file by list of municipality
+def filter_by_municipalities(mun, filename, column_name, filename_result):
+    gdf = gpd.read_file(filename)
+    filtered_gdf = gdf[gdf[column_name].isin(mun)]
+    filtered_gdf.to_file(filename_result, driver="GeoJSON")
 
 # --------------------
 # Create sampling array
