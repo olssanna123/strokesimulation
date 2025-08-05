@@ -23,7 +23,6 @@ def draw_sample(sampling_array):
 
 # --------------------
 # Helper functions
-
 # Get GeoJSON municipality feature
 def get_geojson_municipality_feature(geojson_filename, municipality):
     """
@@ -45,33 +44,38 @@ def get_geojson_municipality_feature(geojson_filename, municipality):
     return None
 
 # GeoJSON to polygon
-def geojson_to_polygon(geojson):
-    """
-    Parses a GeoJSON feature and returns a Shapely Polygon.
-    Accepts both Polygon and MultiPolygon geometry types.
 
-    Args:
-        geojson (dict): A GeoJSON-like dictionary containing a geometry.
+def parse_geojson_polygon_borders(feature):
+    """
+    Extracts only the border (outer ring) coordinates from a GeoJSON Polygon or MultiPolygon feature.
+
+    Parameters:
+        feature (dict): A GeoJSON Feature with Polygon or MultiPolygon geometry.
 
     Returns:
-        shapely.geometry.Polygon: A polygon representing the main area.
+        list: A list of border coordinates.
+              - For Polygon: a single list of coordinates (outer ring).
+              - For MultiPolygon: a list of outer rings.
+
+    Raises:
+        ValueError: If the geometry type is unsupported.
     """
-    geom = shape(geojson['geometry'])
+    if not isinstance(feature, dict):
+        raise ValueError("Input must be a dictionary (GeoJSON Feature).")
 
-    if isinstance(geom, Polygon):
-        polygon = geom
-    elif isinstance(geom, MultiPolygon):
-        # Pick the largest polygon by area
-        polygon = max(geom.geoms, key=lambda p: p.area)
+    geometry = feature.get("geometry")
+    if geometry is None:
+        raise ValueError("Feature does not contain 'geometry'.")
+
+    geom_type = geometry.get("type")
+    coordinates = geometry.get("coordinates")
+
+    if geom_type == "Polygon":
+        return coordinates[0]  # Outer ring
+    elif geom_type == "MultiPolygon":
+        return [polygon[0] for polygon in coordinates]  # Outer rings of each polygon
     else:
-        print("GeoJSON geometry must be of type 'Polygon' or 'MultiPolygon'.")
-        raise ValueError("Unsupported geometry type: " + str(geojson['geometry']['type']))
-
-    if not polygon.is_valid:
-        print("Invalid polygon geometry.")
-        raise ValueError("Invalid polygon geometry.")
-
-    return polygon
+        raise ValueError(f"Unsupported geometry type: {geom_type}")
 
 # --------------------
 # Get borders
@@ -82,7 +86,7 @@ def get_borders(filename, mun):
         raise ValueError(f"Municipality '{mun}' not found in GeoJSON file.")
     else:
         print("The feature collected from the geojson file is " + str(feature))
-    pol = geojson_to_polygon(feature)
+    pol = parse_geojson_polygon_borders(feature)
     return pol
 
 # --------------------
