@@ -85,8 +85,8 @@ def get_borders(filename, mun):
     return pol
 
 # --------------------
-# Generate random point within polygon and return coordinates
-def get_random_point(poly):
+# Generate random point within polygon and return coordinates in the Swedish RT90 coordinate system
+def get_origin(poly):
     min_x, min_y, max_x, max_y = poly.bounds
     while (True):
         point = Point([random.uniform(min_x, max_x), random.uniform(min_y, max_y)])
