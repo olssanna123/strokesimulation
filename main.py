@@ -1,7 +1,7 @@
 # Main
 import matplotlib.pyplot as plt
 
-from origin.origin import extract_borders, parse_borders
+from origin.origin import extract_borders, parse_borders, convert_borders
 
 
 def plot_points(points):
@@ -24,10 +24,11 @@ def plot_points(points):
 
 def main():
     borders = extract_borders("Kartogram_SE_filtered", "Härryda")
-    print(borders)
     parsed_borders = parse_borders(borders)
-    print(parsed_borders)
-    plot_points(parsed_borders["Polygon"])
+    coords = parsed_borders["Polygon"]
+    tuple_coords = [tuple(coord) for coord in coords]
+    print(tuple_coords)
+    convert_borders(tuple_coords)
 
     return
 
