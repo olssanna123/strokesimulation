@@ -1,21 +1,13 @@
 # Origin
-
-# Imports
-import geopandas as gpd
 import json
 import random
-from shapely.geometry import Point
-from shapely.geometry import Polygon
-from shapely.geometry import shape, Polygon, MultiPolygon
 import numpy as np
-
-# RT90 (swedish grid) coordinates to ?
+from shapely.geometry import Point
+from shapely.geometry import shape, Polygon, MultiPolygon
 
 # --------------------
 # Randomly generated municipality
-
-# Pseudo-random number generator
-# Seed used for reproducibility
+# Pseudo-random number generator. Seed used for reproducibility.
 rng = np.random.default_rng(seed=12345)
 
 # Return random integer between 0 and highest_number
@@ -30,7 +22,6 @@ def draw_sample(sampling_array):
 
 # --------------------
 # Get GeoJSON municipality feature
-
 def get_geojson_municipality_feature(geojson_filename, municipality):
     """
     Returns the feature from a GeoJSON file where properties['KnNamn'] matches the given municipality name.
@@ -52,7 +43,6 @@ def get_geojson_municipality_feature(geojson_filename, municipality):
 
 # --------------------
 # GeoJSON to polygon
-
 def geojson_to_polygon(geojson):
     """
     Parses a GeoJSON feature and returns a Shapely Polygon.
@@ -83,7 +73,6 @@ def geojson_to_polygon(geojson):
 
 # --------------------
 # Get borders GeoJSON
-
 def get_borders_geojson(geojson_filename, municipality):
     feature = get_geojson_municipality_feature(geojson_filename, municipality)
     if feature is None:
@@ -96,7 +85,6 @@ def get_borders_geojson(geojson_filename, municipality):
 
 # --------------------
 # Generate random point within polygon and return coordinates
-
 def get_random_point(poly):
     min_x, min_y, max_x, max_y = poly.bounds
     while (True):
