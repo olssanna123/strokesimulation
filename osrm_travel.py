@@ -1,8 +1,8 @@
 import requests
 
 # Coordinates: [longitude, latitude]
-start = (13.388860, 52.517037)  # Berlin Friedrichstraße
-end = (13.397634, 52.529407)    # Berlin Torstraße
+start = (59.334591, 18.063240)
+end = (57.6833, 11.9549)
 
 # OSRM public demo server URL
 url = f"http://router.project-osrm.org/route/v1/driving/{start[0]},{start[1]};{end[0]},{end[1]}"
