@@ -21,6 +21,8 @@ def draw_sample(sampling_array):
     return sample
 
 # --------------------
+# Helper functions
+
 # Get GeoJSON municipality feature
 def get_geojson_municipality_feature(geojson_filename, municipality):
     """
@@ -41,7 +43,6 @@ def get_geojson_municipality_feature(geojson_filename, municipality):
             return feature
     return None
 
-# --------------------
 # GeoJSON to polygon
 def geojson_to_polygon(geojson):
     """
@@ -72,12 +73,12 @@ def geojson_to_polygon(geojson):
     return polygon
 
 # --------------------
-# Get borders GeoJSON
-def get_borders_geojson(geojson_filename, municipality):
-    feature = get_geojson_municipality_feature(geojson_filename, municipality)
+# Get borders
+def get_borders(filename, mun):
+    feature = get_geojson_municipality_feature(filename, mun)
     if feature is None:
-        print("The feature for " + municipality + " not found in GeoJSON file.")
-        raise ValueError(f"Municipality '{municipality}' not found in GeoJSON file.")
+        print("The feature for " + mun + " not found in GeoJSON file.")
+        raise ValueError(f"Municipality '{mun}' not found in GeoJSON file.")
     else:
         print("The feature collected from the geojson file is " + str(feature))
     pol = geojson_to_polygon(feature)
