@@ -66,7 +66,33 @@ def parse_borders(feature):
         raise ValueError(f"Unsupported geometry type: {geom_type}")
 
 def convert_borders():
-    pass
+    """
+    Converts a list of EPSG:3006 (SWEREF99 TM) coordinates to WGS84 (EPSG: 4326) coordinates.
+
+    Parameters:
+        list: A list of EPSG:3006 coordinates.
+
+    Returns:
+        list: A list of EPSG: 4326 coordinates.
+    """
+    from pyproj import Transformer
+
+    # Define the transformer: from EPSG:3006 (SWEREF99 TM) to EPSG:4326 (WGS84)
+    transformer = Transformer.from_crs("EPSG:3006", "EPSG:4326", always_xy=True)
+
+    # Example list of coordinates in EPSG:3006
+    coords_3006 = [
+        (674032.357, 6580821.243),  # (Easting, Northing)
+        (674200.000, 6581000.000),
+        # Add more as needed
+    ]
+
+    # Convert to WGS84 (longitude, latitude)
+    coords_wgs84 = [transformer.transform(x, y) for x, y in coords_3006]
+
+    # Print or use in OSRM (format: lon,lat)
+    for lon, lat in coords_wgs84:
+        print(f"{lon},{lat}")
 
 # Generate a random point within polygon and return coordinates
 def get_origin(poly):
