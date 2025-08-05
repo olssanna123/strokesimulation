@@ -14,13 +14,11 @@ def time_difference(a, b):  # Get the time difference
 
 # --------------------
 # Get time at hospital in sec
-
 def get_time_at_hospital():
     pass
 
 # --------------------
-# Get the travel time
-
+# Get travel time
 def get_travel_time(origin, emergency_hospital, final_hospital):
 
     # Calculate the travel time from origin to the emergency hospital in sec
@@ -38,7 +36,7 @@ def get_travel_time(origin, emergency_hospital, final_hospital):
     # Calculate travel time from origin straight to final hospital in sec
     origin_to_final_hospital = get_time(origin, final_hospital)
 
-    # Calculate the saved time going straight to Sahlgrenska
+    # Calculate the saved time going straight to final hospital
     saved_time = time_difference(total_time_via_emergency_hospital, origin_to_final_hospital)
 
     travel_time = {
