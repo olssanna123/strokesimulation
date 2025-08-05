@@ -49,7 +49,6 @@ def parse_borders(feature):
 
     geom_type = geometry.get("type")
     coordinates = geometry.get("coordinates")
-    print(coordinates)
 
     if geom_type == "Polygon":
         res = {
@@ -82,7 +81,6 @@ def convert_borders(coords):
     transformer = Transformer.from_crs("EPSG:3006", "EPSG:4326", always_xy=True)
 
     coords_wgs84 = [transformer.transform(x, y) for x, y in coords]
-    print(coords_wgs84)
 
 # Generate a random point within polygon and return coordinates
 def get_origin(poly):

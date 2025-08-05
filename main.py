@@ -1,6 +1,7 @@
 # Main
 import matplotlib.pyplot as plt
 
+from hospital.hospital import get_time
 from origin.origin import extract_borders, parse_borders, convert_borders
 
 
@@ -28,7 +29,8 @@ def main():
     coords = parsed_borders["Polygon"]
     tuple_coords = [tuple(coord) for coord in coords]
     convert_borders(tuple_coords)
-
+    time = get_time((57.878303, 11.969459), (57.6833, 11.9549))
+    print(str(time) + " s")
     return
 
 main()
