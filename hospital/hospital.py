@@ -1,6 +1,5 @@
 # Hospital
-
-# Imports
+from data.data import emergency_hospitals, emergency_hospitals_coord
 
 # --------------------
 # Helper functions
@@ -55,17 +54,6 @@ def get_travel_time(origin, emergency_hospital, final_hospital):
 
 # --------------------
 # Find closest emergency hospital
-
-# List with the emergency hospital in VGR
-emergency_hospitals = [("Kungälvs sjukhus", (57.878303, 11.969459)), ("Norra Älvsborgs länssjukhus", (58.318547, 12.265819)), ("Södra Älvsborgs Sjukhus", (57.724261, 12.961380)), ("Alingsås lasarett", (57.928649, 12.521170)), ("Skaraborgs Sjukhus Skövde", (58.426663, 13.851575)), ("Sahlgrenska Universitetssjukhuset", (57.6833, 11.9549))]
-emergency_hospitals_coord = {
-    "Kungälvs sjukhus": (57.878303, 11.969459),
-    "Norra Älvsborgs länssjukhus": (58.318547, 12.265819),
-    "Södra Älvsborgs Sjukhus": (57.724261, 12.961380),
-    "Alingsås lasarett": (57.928649, 12.521170),
-    "Skaraborgs Sjukhus Skövde": (58.426663, 13.851575),
-    "Sahlgrenska Universitetssjukhuset": (57.6833, 11.9549)
-}
 
 def get_emergency_hospital(origin):
     closest_emergency_hospital = emergency_hospitals[0][0]

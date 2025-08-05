@@ -24,6 +24,15 @@ def filter_by_municipalities(mun, filename, column_name, filename_result):
 
 # --------------------
 # List of emergency hospitals
+emergency_hospitals = [("Kungälvs sjukhus", (57.878303, 11.969459)), ("Norra Älvsborgs länssjukhus", (58.318547, 12.265819)), ("Södra Älvsborgs Sjukhus", (57.724261, 12.961380)), ("Alingsås lasarett", (57.928649, 12.521170)), ("Skaraborgs Sjukhus Skövde", (58.426663, 13.851575)), ("Sahlgrenska Universitetssjukhuset", (57.6833, 11.9549))]
+emergency_hospitals_coord = {
+    "Kungälvs sjukhus": (57.878303, 11.969459),
+    "Norra Älvsborgs länssjukhus": (58.318547, 12.265819),
+    "Södra Älvsborgs Sjukhus": (57.724261, 12.961380),
+    "Alingsås lasarett": (57.928649, 12.521170),
+    "Skaraborgs Sjukhus Skövde": (58.426663, 13.851575),
+    "Sahlgrenska Universitetssjukhuset": (57.6833, 11.9549)
+}
 
 # --------------------
 # Population data
