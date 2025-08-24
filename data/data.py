@@ -1,21 +1,29 @@
 # Data
 import pandas as pd
 
+
+# -------------------
 emergency_hospitals = [("Kungälvs sjukhus", (57.878303, 11.969459)), ("Norra Älvsborgs länssjukhus", (58.318547, 12.265819)), ("Södra Älvsborgs Sjukhus", (57.724261, 12.961380)), ("Alingsås lasarett", (57.928649, 12.521170)), ("Skaraborgs Sjukhus Skövde", (58.426663, 13.851575)), ("Sahlgrenska Universitetssjukhuset", (57.6833, 11.9549))]
+
 emergency_hospitals_coord = {
-    "Kungälvs sjukhus": (57.878303, 11.969459),
-    "Norra Älvsborgs länssjukhus": (58.318547, 12.265819),
-    "Södra Älvsborgs Sjukhus": (57.724261, 12.961380),
-    "Alingsås lasarett": (57.928649, 12.521170),
-    "Skaraborgs Sjukhus Skövde": (58.426663, 13.851575),
-    "Sahlgrenska Universitetssjukhuset": (57.6833, 11.9549)
+    "Kungälvs sjukhus": '11.96847,57.87821',
+    "Norra Älvsborgs länssjukhus": '12.26506,58.31891',
+    "Södra Älvsborgs Sjukhus": '12.96283,57.72539',  # from 57°43'31.422"N, 12°57'46.195"E
+    "Alingsås lasarett": '12.52152,57.92877',
+    "Skaraborgs Sjukhus Skövde": '13.85025,58.42690',
+    "Sahlgrenska Universitetssjukhuset": '11.95833, 57.68333'  # from 57°41′0″N, 11°57′30″E
 }
 
+def get_em_hosp_coord():
+    return emergency_hospitals_coord
+
+# ------------------
 list_mun = ['Ale','Alingsås','Bengtsfors','Bollebygd','Borås','Dals-Ed','Essunga','Falköping','Färgelanda','Grästorp','Gullspång','Göteborg','Götene','Herrljunga','Hjo','Härryda','Karlsborg','Kungälv','Lerum','Lidköping','Lilla Edet','Lysekil','Mariestad','Mark','Mellerud','Munkedal','Mölndal','Orust','Partille','Skara','Skövde','Sotenäs','Stenungsund','Strömstad','Svenljunga','Tanum','Tibro','Tidaholm','Tjörn','Tranemo','Trollhättan','Töreboda','Uddevalla','Ulricehamn','Vara','Vårgårda','Vänersborg','Åmål','Öckerö']
 
 def get_municipalities():
   return list_mun
 
+# -------------------
 data = {
   "Kommun": ['Ale','Alingsås','Bengtsfors','Bollebygd','Borås','Dals-Ed','Essunga','Falköping','Färgelanda','Grästorp','Gullspång','Göteborg','Götene','Herrljunga','Hjo','Härryda','Karlsborg','Kungälv','Lerum','Lidköping','Lilla Edet','Lysekil','Mariestad','Mark','Mellerud','Munkedal','Mölndal','Orust','Partille','Skara','Skövde','Sotenäs','Stenungsund','Strömstad','Svenljunga','Tanum','Tibro','Tidaholm','Tjörn','Tranemo','Trollhättan','Töreboda','Uddevalla','Ulricehamn','Vara','Vårgårda','Vänersborg','Åmål','Öckerö'],
   "Folkmangd": [32446,42382,9138,9733,114592,4606,5656,32991,6434,5563,5119,604616,13218,9441,9258,39875,7061,49785,43706,40539,14426,13969,24647,35287,9165,10502,70534,15333,40730,18654,57763,9052,27862,13476,10759,12865,11332,12839,16146,11883,59073,9141,57045,25087,16066,12384,40012,12006,12819]
@@ -47,6 +55,8 @@ def create_sampling_array():
             k += 1
         j += 1
     return sampling_array
+
+# --------------------------
 
 # North east south west coordinates (latitude, longitude)
 borders = {
