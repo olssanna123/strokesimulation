@@ -1,12 +1,13 @@
 # Main
-from osrm_travel import get_time
-from result.result import create_saved_table, create_saved_avg_table
-
+from hospital.hospital import name_to_coord
+from osrm_travel import get_travel_time
 
 def main():
-    got = (57.70716, 11.96679)
+
     malm = (55.60587, 13.00073)
-    res = get_time(got, malm)
+    akut = name_to_coord("Kungälvs sjukhus")
+    sahl = (57.6833306, 11.95499618)
+    res = get_travel_time(malm, akut, sahl)
     print(res)
     return
 
