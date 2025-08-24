@@ -18,7 +18,7 @@ def loop_demo(sampling_array, final_hospital):
         saved_time = 0
         write_saved(saved_time)
     else:
-        saved_time = time["Origin to emergency hospital"]["total"]  + 7200 + time["Emergency hospital to final hospital"]["total"] - time["Origin to final hospital"]["total"]
+        saved_time = time["Origin to emergency hospital"]  + 7200 + time["Emergency hospital to final hospital"] - time["Origin to final hospital"]
         print("Saved time")
         print(saved_time)
         write_saved(saved_time)

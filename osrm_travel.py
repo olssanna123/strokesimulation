@@ -38,3 +38,17 @@ def get_travel_time(origin, emergency_hospital, final_hospital):
     }
 
     return res
+
+def to_osrm(coord):
+    """
+    Convert a coordinate from (latitude, longitude) to (longitude, latitude)
+    for OSRM.
+
+    Parameters:
+        coord (tuple): (latitude, longitude)
+
+    Returns:
+        tuple: (longitude, latitude)
+    """
+    lat, lon = coord
+    return (lon, lat)
