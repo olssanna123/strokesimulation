@@ -11,7 +11,7 @@ emergency_hospitals_coord = {
     "Södra Älvsborgs Sjukhus": '12.96283,57.72539',  # from 57°43'31.422"N, 12°57'46.195"E
     "Alingsås lasarett": '12.52152,57.92877',
     "Skaraborgs Sjukhus Skövde": '13.85025,58.42690',
-    "Sahlgrenska Universitetssjukhuset": '11.95833, 57.68333'  # from 57°41′0″N, 11°57′30″E
+    "Sahlgrenska Universitetssjukhuset": '11.95833,57.68333'  # from 57°41′0″N, 11°57′30″E
 }
 
 def get_em_hosp_coord():

@@ -12,7 +12,7 @@ def show_map():
 
     # Only takes WGS84 geographic coordinates
     start = request.args.get('start', '13.0038,55.6050')
-    end = request.args.get('end', '11.9668,57.6819')
+    end = request.args.get('end', coords["Sahlgrenska Universitetssjukhuset"])
 
     return render_template('map.html', start=start, end=end)
 
