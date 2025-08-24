@@ -1,6 +1,6 @@
 # Hospital
 from data.data import emergency_hospitals, emergency_hospitals_coord
-from google_travel_calc import get_time
+from osrm_travel import get_time
 
 
 # Find the closest emergency hospital

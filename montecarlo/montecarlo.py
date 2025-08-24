@@ -1,8 +1,8 @@
 from data.data import get_borders
-from google_travel_demo import get_travel_time_demo
 from hospital.hospital import get_emergency_hospital
 from origin.origin import draw_sample, get_origin
-from result.database import write_saved
+from osrm_travel import get_travel_time
+from result.result import write_saved
 
 
 def loop_demo(sampling_array, final_hospital):
@@ -11,7 +11,7 @@ def loop_demo(sampling_array, final_hospital):
     origin = get_origin(borders)
     emergency_hospital = get_emergency_hospital(origin)
 
-    time = get_travel_time_demo(origin, emergency_hospital, final_hospital)
+    time = get_travel_time(origin, emergency_hospital, final_hospital)
 
     if emergency_hospital == "Sahlgrenska Universitetssjukhuset":
         print("Sahlgrenska Universitetssjukhuset")
