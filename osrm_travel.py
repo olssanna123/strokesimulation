@@ -25,16 +25,3 @@ def get_time(start, end):
         return duration_sec
     else:
         print(f"Error: {response.status_code}")
-
-def get_travel_time(origin, emergency_hospital, final_hospital):
-    origin_to_emergency_hospital = get_time(origin, emergency_hospital)
-    emergency_hospital_to_final_hospital = get_time(emergency_hospital, final_hospital)
-    origin_to_final_hospital = get_time(origin, final_hospital)
-
-    time = {
-        "Origin to emergency hospital": origin_to_emergency_hospital,
-        "Emergency hospital to final hospital": emergency_hospital_to_final_hospital,
-        "Origin to final hospital": origin_to_final_hospital
-    }
-
-    return time
