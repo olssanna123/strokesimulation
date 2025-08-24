@@ -11,26 +11,31 @@
 <div id="map" style="width: 100%; height: 100vh;"></div>
 
 <script>
-    // Initialize map
-    var map = L.map('map').setView([52.52, 13.405], 13);
+    var start = "{{ start }}".split(',');
+    var end = "{{ end }}".split(',');
+
+    var map = L.map('map').setView([start[1], start[0]], 13);
 
     // Add OSM tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
     }).addTo(map);
 
-    // Get OSRM route
-    fetch('https://router.project-osrm.org/route/v1/driving/13.388860,52.517037;13.397634,52.529407?overview=full&geometries=geojson')
+    // Fetch OSRM route
+    var url = `https://router.project-osrm.org/route/v1/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&geometries=geojson`;
+
+    fetch(url)
     .then(response => response.json())
     .then(data => {
         var route = data.routes[0].geometry;
-        // Add route to map
-        L.geoJSON(route, {
-            style: { color: 'blue', weight: 5 }
-        }).addTo(map);
-        // Fit map to route
+        L.geoJSON(route, { style: { color: 'blue', weight: 5 } }).addTo(map);
+
         var coords = route.coordinates.map(c => [c[1], c[0]]);
         map.fitBounds(coords);
+
+        // Add start and end markers
+        L.marker([start[1], start[0]]).addTo(map).bindPopup("Start");
+        L.marker([end[1], end[0]]).addTo(map).bindPopup("End");
     });
 </script>
 </body>
