@@ -7,8 +7,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def show_map():
-    start = request.args.get('start', '13.388860,52.517037')  # default Berlin
-    end = request.args.get('end', '13.397634,52.529407')  # default Berlin
+    # Only takes WGS84 geographic coordinates
+    start = request.args.get('start', '13.0038,55.6050')
+    end = request.args.get('end', '11.9668,57.6819')
 
     return render_template('map.html', start=start, end=end)
 
