@@ -1,5 +1,21 @@
 import requests
 
+from hospital.hospital import name_to_coord
+
+def to_osrm(coord):
+    """
+    Convert a coordinate from (latitude, longitude) to (longitude, latitude)
+    for OSRM.
+
+    Parameters:
+        coord (tuple): (latitude, longitude)
+
+    Returns:
+        tuple: (longitude, latitude)
+    """
+    lat, lon = coord
+    return (lon, lat)
+
 
 def get_time(start, end):
     # OSRM public demo server URL
@@ -27,9 +43,9 @@ def get_time(start, end):
         print(f"Error: {response.status_code}")
 
 def get_travel_time(origin, emergency_hospital, final_hospital):
-    origin_to_emergency_hospital = get_time(origin, emergency_hospital)
-    emergency_hospital_to_final_hospital = get_time(emergency_hospital, final_hospital)
-    origin_to_final_hospital = get_time(origin, final_hospital)
+    origin_to_emergency_hospital = get_time(to_osrm(origin), name_to_coord(emergency_hospital))
+    emergency_hospital_to_final_hospital = get_time(name_to_coord(emergency_hospital), name_to_coord(final_hospital))
+    origin_to_final_hospital = get_time(to_osrm(origin), name_to_coord(final_hospital))
 
     res = {
         "Origin to emergency hospital": origin_to_emergency_hospital,
@@ -39,16 +55,3 @@ def get_travel_time(origin, emergency_hospital, final_hospital):
 
     return res
 
-def to_osrm(coord):
-    """
-    Convert a coordinate from (latitude, longitude) to (longitude, latitude)
-    for OSRM.
-
-    Parameters:
-        coord (tuple): (latitude, longitude)
-
-    Returns:
-        tuple: (longitude, latitude)
-    """
-    lat, lon = coord
-    return (lon, lat)
