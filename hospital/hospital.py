@@ -29,3 +29,12 @@ def get_emergency_hospital(origin, hospitals):
     # Sort by travel time
     times.sort(key=lambda x: x[1])
     print(times)
+
+    time_to_sahl1 = times[0][1] + get_time(name_to_coord(times[0][0]), name_to_coord(SAHLGRENSKA))
+    time_to_sahl2 = times[1][1] + get_time(name_to_coord(times[1][0]), name_to_coord(SAHLGRENSKA))
+
+    if time_to_sahl2 < time_to_sahl1 and times[1][1] < 900:
+        print(times[0])
+    else:
+        print(times[1])
+
