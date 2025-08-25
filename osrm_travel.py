@@ -24,8 +24,6 @@ def get_time(start, end):
         route = data['routes'][0]
         duration_sec = route['duration']
         distance_m = route['distance']
-        print(f"Travel time: {duration_sec:.0f} seconds")
-        print(f"Distance: {distance_m/1000:.2f} km")
         return duration_sec
     else:
         print(f"Error: {response.status_code}")
