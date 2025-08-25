@@ -33,5 +33,8 @@ def get_emergency_hospital(origin, hospitals):
     time_to_sahl1 = times[0][1] + get_time(name_to_coord(times[0][0]), name_to_coord(SAHLGRENSKA))
     time_to_sahl2 = times[1][1] + get_time(name_to_coord(times[1][0]), name_to_coord(SAHLGRENSKA))
 
-    print(time_to_sahl1)
-    print(time_to_sahl2)
+    if time_to_sahl2 < time_to_sahl1:
+        if times[1][1] < 900:
+            print("Beslutsregel! " +  times[1][0] + " " + str(times[1][1]))
+        else:
+            print("Ej beslutsregel! " + times[0][0])
