@@ -36,7 +36,7 @@ def get_emergency_hospital(origin, hospitals):
     if time_to_sahl2 < time_to_sahl1:
         if times[1][1] < 900:
             print("Beslutsregel! " +  times[1][0] + " " + str(times[1][1]))
-            return times[1][0]
+            return times[1]
         else:
             print("Ej beslutsregel! " + times[0][0])
-            return times[0][0]
+            return times[0]

@@ -1,7 +1,6 @@
 from data.data import get_borders, get_hospitals
 from hospital.hospital import name_to_coord, get_emergency_hospital
 from origin.origin import draw_sample, get_origin
-from osrm_travel import get_time
 
 
 def loop(sampling_array):
@@ -11,13 +10,15 @@ def loop(sampling_array):
     hospitals = get_hospitals()
     emergency_hospital = get_emergency_hospital(origin, hospitals)
 
-    if emergency_hospital == "Sahlgrenska Universitetssjukhuset":
-        print("Sahlgrenska Universitetssjukhuset is the closest emergency hospital!")
-        saved_time = 0
-        print("Saved time is " + str(saved_time) + " seconds")
     res = {
         "Origin": origin,
         "Emergency hospital": emergency_hospital[0]
     }
 
-    print(res)
+    if emergency_hospital == "Sahlgrenska Universitetssjukhuset":
+        print("Sahlgrenska Universitetssjukhuset is the closest emergency hospital!")
+        saved_time = 0
+        print("Saved time is " + str(saved_time) + " seconds")
+
+
+    return res
