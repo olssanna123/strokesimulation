@@ -1,13 +1,11 @@
 # Main
-from data.data import create_sampling_array
-from montecarlo.loop import loop
+from data.data import get_hospitals
+from hospital.hospital import get_emergency_hospital
 
 
 def main():
-    array = create_sampling_array()
-    res = loop(array)
-    print("The loop result is: ")
-    print(res)
+    varberg = (57.10557, 12.25078)
+    get_emergency_hospital(varberg, get_hospitals())
     return
 
 main()

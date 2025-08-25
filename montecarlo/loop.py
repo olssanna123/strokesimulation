@@ -1,5 +1,5 @@
-from data.data import get_borders, emergency_hospitals
-from hospital.hospital import find_emergency_hospital, name_to_coord
+from data.data import get_borders, emergency_hospitals, get_hospitals
+from hospital.hospital import name_to_coord, get_emergency_hospital
 from origin.origin import draw_sample, get_origin
 from osrm_travel import get_time, to_osrm
 
@@ -8,7 +8,8 @@ def loop(sampling_array):
     mun = draw_sample(sampling_array)
     borders = get_borders(mun)
     origin = get_origin(borders)
-    emergency_hospital = find_emergency_hospital(origin, emergency_hospitals)
+    hospitals = get_hospitals()
+    emergency_hospital = get_emergency_hospital(origin, hospitals)
 
     if emergency_hospital == "Sahlgrenska Universitetssjukhuset":
         print("Sahlgrenska Universitetssjukhuset is the closest emergency hospital!")
@@ -35,4 +36,4 @@ def loop(sampling_array):
         "Emergency hospital": emergency_hospital[0],
     }
 
-    return res
+    print(res)

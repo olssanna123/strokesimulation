@@ -1,19 +1,8 @@
 import requests
 
 
-def to_osrm(coord):
-    """
-    Convert a coordinate from (latitude, longitude) to (longitude, latitude)
-    for OSRM.
-
-    Parameters:
-        coord (tuple): (latitude, longitude)
-
-    Returns:
-        tuple: (longitude, latitude)
-    """
-    lat, lon = coord
-    return (lon, lat)
+def format_coordinates(latitude, longitude):
+    return f"'{longitude},{latitude}'"
 
 
 def get_time(start, end):

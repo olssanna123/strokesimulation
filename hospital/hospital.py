@@ -9,7 +9,7 @@ def name_to_coord(name):
     return emergency_hospitals_coord[name]
 
 
-def two_nearest_hospitals(origin, hospitals):
+def get_emergency_hospital(origin, hospitals):
     """
     Returns the two hospitals with the least travel time from origin.
 
