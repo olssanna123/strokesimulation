@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from data.data import get_em_hosp_coord
+from data.data import get_hospitals_coordinates
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def show_map():
 
-    coords = get_em_hosp_coord()
+    coords = get_hospitals_coordinates()
 
     # Only takes WGS84 geographic coordinates
     start = request.args.get('start', '13.0038,55.6050')

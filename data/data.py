@@ -14,7 +14,7 @@ emergency_hospitals_coord = {
     "Sahlgrenska Universitetssjukhuset": '11.95833,57.68333'  # from 57°41′0″N, 11°57′30″E
 }
 
-def get_em_hosp_coord():
+def get_hospitals_coordinates():
     return emergency_hospitals_coord
 
 def get_hospitals():
