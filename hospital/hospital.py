@@ -1,5 +1,5 @@
 # Hospital
-from data.data import emergency_hospitals_coord
+from data.data import emergency_hospitals_coord, emergency_hospitals
 from osrm_travel import get_time, to_osrm
 
 
@@ -8,8 +8,7 @@ def name_to_coord(name):
     return emergency_hospitals_coord[name]
 
 # Decision rules
-
-def find_two_closest_hospitals(origin, emergency_hospitals):
+def find_two_closest_hospitals(origin):
     """
     Finds the two closest hospitals based on travel time and the difference between them.
     If the next closest hospital has less travel time to Sahlgrenska and the time difference between the travel time
