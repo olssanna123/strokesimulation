@@ -1,11 +1,10 @@
 from data.data import get_borders
-from hospital.hospital import get_emergency_hospital
 from origin.origin import draw_sample, get_origin
-from osrm_travel import get_travel_time
+
 from result.result import write_saved
 
 
-def loop_demo(sampling_array, final_hospital):
+def loop(sampling_array, final_hospital):
     mun = draw_sample(sampling_array)
     borders = get_borders(mun)
     origin = get_origin(borders)
