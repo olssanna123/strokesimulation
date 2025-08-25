@@ -1,22 +1,20 @@
-from flask import Flask, render_template, request
-
+from flask import Flask, render_template, request, jsonify
 from data.data import get_hospitals_coordinates
-from osrm_travel import format_coordinates
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def show_map():
-    varberg = '12.25078,57.10557'
-    coords = get_hospitals_coordinates()
+    return render_template('map.html')
 
-    # Only takes WGS84 geographic coordinates
-    start = request.args.get('start', varberg)
-    end = request.args.get('end', coords["Sahlgrenska Universitetssjukhuset"])
+@app.route('/get-coordinates')
+def get_coordinates():
+    hospitals = get_hospitals_coordinates()
+    start = request.args.get('start', hospitals["Kungälvs sjukhus"])
+    stop = request.args.get('stop', hospitals["Norra Älvsborgs länssjukhus"])
+    end = request.args.get('end', hospitals["Sahlgrenska Universitetssjukhuset"])
 
-    return render_template('map.html', start=start, end=end)
-
+    return jsonify({'start': start, 'stop': stop, 'end': end})
 
 if __name__ == '__main__':
     app.run(debug=True)

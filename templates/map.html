@@ -1,42 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OSRM Route</title>
+    <title>OSRM Routes with Stop</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        .legend {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body style="margin:0; padding:0;">
 <div id="map" style="width: 100%; height: 100vh;"></div>
 
-<script>
-    var start = "{{ start }}".split(',');
-    var end = "{{ end }}".split(',');
+<div class="legend">
+    <div><span class="legend-color" style="background: blue;"></span> Route 1 (with Stop)</div>
+    <div><span class="legend-color" style="background: red;"></span> Route 2 (Direct)</div>
+</div>
 
-    var map = L.map('map').setView([start[1], start[0]], 13);
+<script>
+    var map = L.map('map').setView([0, 0], 13);
 
     // Add OSM tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
     }).addTo(map);
 
-    // Fetch OSRM route
-    var url = `https://router.project-osrm.org/route/v1/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&geometries=geojson`;
+    var allCoords = [];
+    var routeLayers = [];
 
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        var route = data.routes[0].geometry;
-        L.geoJSON(route, { style: { color: 'blue', weight: 5 } }).addTo(map);
+    function clearRoutes() {
+        routeLayers.forEach(layer => map.removeLayer(layer));
+        routeLayers = [];
+        allCoords = [];
+    }
 
-        var coords = route.coordinates.map(c => [c[1], c[0]]);
-        map.fitBounds(coords);
+    function addRoute(waypoints, color, labels) {
+        var coordsStr = waypoints.map(p => p[0] + ',' + p[1]).join(';');
+        var url = `https://router.project-osrm.org/route/v1/driving/${coordsStr}?overview=full&geometries=geojson`;
 
-        // Add start and end markers
-        L.marker([start[1], start[0]]).addTo(map).bindPopup("Start");
-        L.marker([end[1], end[0]]).addTo(map).bindPopup("End");
-    });
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var route = data.routes[0].geometry;
+            var layer = L.geoJSON(route, { style: { color: color, weight: 5 } }).addTo(map);
+            routeLayers.push(layer);
+
+            var coords = route.coordinates.map(c => [c[1], c[0]]);
+            allCoords = allCoords.concat(coords);
+
+            // Add markers
+            waypoints.forEach((p, index) => {
+                L.marker([p[1], p[0]]).addTo(map).bindPopup(labels[index]);
+            });
+
+            if (allCoords.length > 0) {
+                var bounds = L.latLngBounds(allCoords);
+                map.fitBounds(bounds);
+            }
+        });
+    }
+
+    function updateRoutes() {
+        fetch('/get-coordinates')
+        .then(response => response.json())
+        .then(data => {
+            clearRoutes();
+            var start = data.start.split(',').map(Number);
+            var stop = data.stop.split(',').map(Number);
+            var end = data.end.split(',').map(Number);
+
+            addRoute([start, stop, end], 'blue', ['Start', 'Stop', 'End']);
+            addRoute([start, end], 'red', ['Start', 'End']);
+        });
+    }
+
+    // Initial load
+    updateRoutes();
+
+    // Refresh every 30 seconds
+    setInterval(updateRoutes, 30000);
 </script>
+
 </body>
 </html>
