@@ -8,7 +8,7 @@ def name_to_coord(name):
     return emergency_hospitals_coord[name]
 
 # Decision rules
-def find_two_closest_hospitals(origin, emergency_hospitals):
+def find_emergency_hospital(origin, emergency_hospitals):
     """
     Finds the two closest hospitals based on travel time and the difference between them.
     If the next closest hospital has less travel time to Sahlgrenska and the time difference between the travel time

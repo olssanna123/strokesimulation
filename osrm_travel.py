@@ -1,6 +1,5 @@
 import requests
 
-from hospital.hospital import name_to_coord
 
 def to_osrm(coord):
     """
