@@ -1,8 +1,8 @@
 import requests
 
 
-def format_coordinates(latitude, longitude):
-    return f"'{longitude},{latitude}'"
+def format_coordinates(a, b):
+    return f"'{b},{a}'"
 
 
 def get_time(start, end):
