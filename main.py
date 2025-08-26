@@ -12,7 +12,7 @@ def convert_seconds(seconds):
     units = [("hours", 3600), ("minutes", 60), ("seconds", 1)]
     values = []
     for _, value in units:
-        count = seconds // value
+        count = int(seconds // value)  # Convert to integer
         seconds -= count * value
         values.append(count)
     return f"{values[0]:02d}:{values[1]:02d}:{values[2]:02d}"
