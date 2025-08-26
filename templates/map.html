@@ -47,10 +47,17 @@
 
     var allCoords = [];
     var routeLayers = [];
+    var markers = []; // ✅ Array to store markers
 
     function clearRoutes() {
+        // Remove old routes
         routeLayers.forEach(layer => map.removeLayer(layer));
         routeLayers = [];
+
+        // Remove old markers
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+
         allCoords = [];
     }
 
@@ -68,9 +75,10 @@
             var coords = route.coordinates.map(c => [c[1], c[0]]);
             allCoords = allCoords.concat(coords);
 
-            // Add markers
+            // Add markers and track them for removal later
             waypoints.forEach((p, index) => {
-                L.marker([p[1], p[0]]).addTo(map).bindPopup(labels[index]);
+                var marker = L.marker([p[1], p[0]]).addTo(map).bindPopup(labels[index]);
+                markers.push(marker);
             });
 
             if (allCoords.length > 0) {
@@ -84,7 +92,7 @@
         fetch('/get-coordinates')
         .then(response => response.json())
         .then(data => {
-            clearRoutes();
+            clearRoutes(); // ✅ Removes old routes AND markers
             var start = data.start.split(',').map(Number);
             var stop = data.stop.split(',').map(Number);
             var end = data.end.split(',').map(Number);
@@ -100,6 +108,7 @@
     // Refresh every 30 seconds
     setInterval(updateRoutes, 30000);
 </script>
+
 
 </body>
 </html>
