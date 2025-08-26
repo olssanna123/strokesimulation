@@ -1,6 +1,7 @@
 from data.data import get_borders, get_hospitals
 from hospital.hospital import name_to_coord, get_emergency_hospital
 from origin.origin import draw_sample, get_origin
+from result.result import write_saved
 
 
 def loop(sampling_array):
@@ -19,6 +20,9 @@ def loop(sampling_array):
         print("Sahlgrenska Universitetssjukhuset is the closest emergency hospital!")
         saved_time = 0
         print("Saved time is " + str(saved_time) + " seconds")
-
+        #write_saved(saved_time)
+    else:
+        print("The closest emergency hospital is " + emergency_hospital[0])
+        via_emergency_hospital = get_time(origin, )
 
     return res

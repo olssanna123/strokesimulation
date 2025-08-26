@@ -1,5 +1,5 @@
 from data.data import emergency_hospitals_coord
-from osrm_travel import get_time, format_coordinates
+from osrm_travel import get_time
 
 SAHLGRENSKA = "Sahlgrenska Universitetssjukhuset"
 

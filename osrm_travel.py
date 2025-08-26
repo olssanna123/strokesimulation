@@ -1,10 +1,6 @@
 import requests
 
 
-def format_coordinates(a, b):
-    return f"'{b},{a}'"
-
-
 def get_time(start, end):
     # OSRM public demo server URL
     url = f"http://router.project-osrm.org/route/v1/driving/{start[0]},{start[1]};{end[0]},{end[1]}"
