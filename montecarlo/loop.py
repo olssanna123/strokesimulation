@@ -7,20 +7,22 @@ from result.result import write_saved
 
 
 def loop(sampling_array):
+
+    # Random municipality and it's borders
     mun = draw_sample(sampling_array)
     borders = get_borders(mun)
+
+    # Origin a random point within these borders
     origin = get_origin(borders)
-
-    hospitals = get_hospitals()
-    emergency_hospital = get_emergency_hospital(origin, hospitals)
-
-    # Origin
     print(origin)
     origin_formatted = (origin[1],origin[0])
     print(origin_formatted)
     time = get_time(origin_formatted, name_to_coord("Sahlgrenska Universitetssjukhuset"))
     print(convert_seconds(time))
 
+    # Hospital find closest emergency hospital and decision rules
+    hospitals = get_hospitals()
+    emergency_hospital = get_emergency_hospital(origin, hospitals)
 
 
     res = {
