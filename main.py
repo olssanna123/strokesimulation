@@ -1,9 +1,7 @@
 # Main
 
-from data.data import create_sampling_array, get_borders
-from hospital.hospital import name_to_coord
-from origin.origin import draw_sample, get_origin
-from osrm_travel import get_time
+from data.data import create_sampling_array
+from montecarlo.loop import loop
 
 
 def convert_seconds(seconds):
@@ -19,14 +17,8 @@ def convert_seconds(seconds):
 
 def main():
     array = create_sampling_array()
-    mun = draw_sample(array)
-    borders = get_borders(mun)
-    origin = get_origin(borders)
-    print(origin)
-    origin_formatted = (origin[1],origin[0])
-    print(origin_formatted)
-    time = get_time(origin_formatted, name_to_coord("Sahlgrenska Universitetssjukhuset"))
-    print(convert_seconds(time))
+    res = loop(array)
+    print(res)
     return
 
 main()
