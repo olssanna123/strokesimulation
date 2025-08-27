@@ -37,6 +37,8 @@ def loop(sampling_array):
         #write_saved(saved_time)
     else:
         print("The closest emergency hospital is " + emergency_hospital[0])
-        via_emergency_hospital = get_time(origin, )
+        via_emergency_hospital = get_time(origin_formatted, emergency_hospital) + 7200 # 2 h at emergency hospital
+        straight_to_sahlgrenska = get_time(origin_formatted, name_to_coord("Sahlgrenska Universitetssjukhuset"))
+
 
     return res
