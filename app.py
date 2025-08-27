@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from data.data import get_hospitals_coordinates, create_sampling_array
-from montecarlo.loop import loop
+from montecarlo.iterate import loopOS
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def show_map():
 @app.route('/get-coordinates')
 def get_coordinates():
     array = create_sampling_array()
-    res = loop(array)
+    res = loopOS(array)
 
     hospitals = get_hospitals_coordinates()
 

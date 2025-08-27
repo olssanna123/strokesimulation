@@ -1,7 +1,6 @@
 # Main
 
 from data.data import create_sampling_array
-from montecarlo.loop import loop
 
 
 def convert_seconds(seconds):
@@ -16,9 +15,6 @@ def convert_seconds(seconds):
     return f"{values[0]:02d}:{values[1]:02d}:{values[2]:02d}"
 
 def main():
-    array = create_sampling_array()
-    res = loop(array)
-    print(res)
     return
 
 main()

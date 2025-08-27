@@ -5,7 +5,7 @@ from origin.origin import draw_sample, get_origin
 from osrm_travel import get_time
 
 
-def loop(sampling_array):
+def loopOS(sampling_array):
     # Random municipality and it's borders
     mun = draw_sample(sampling_array)
     borders = get_borders(mun)
